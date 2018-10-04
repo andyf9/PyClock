@@ -9,8 +9,6 @@ class Clock(QtGui.QWidget):
     def __init__(self, demoMode = False):
         super(Clock, self).__init__()
 
-        #self.setGeometry(300, 300, 250, 150)
-        self.setStyleSheet("background-color:black;")
         self.setWindowTitle('Clock')
         self.demoMode = demoMode
 
@@ -28,19 +26,21 @@ class Clock(QtGui.QWidget):
         self.hourPen = QtGui.QPen(QtGui.QBrush(QtCore.Qt.white), 8)
         self.minutePen = QtGui.QPen(QtGui.QBrush(QtCore.Qt.lightGray), 3)
         self.secondPen = QtGui.QPen(QtCore.Qt.red)
-    
+        
+        self.tick()
+
     def paintEvent(self, e):
         qp = QtGui.QPainter()
         qp.begin(self)
         qp.setRenderHint(QtGui.QPainter.Antialiasing, True)
-        
+
         # work out the centre
         cx = self.width() / 2
         cy = self.height() / 2
         smallestDimension = min(self.width(),self.height())
         radius = smallestDimension / 2.8
         hourMark = (smallestDimension / 2 - radius) * 0.8
-        
+
         # draw dial
         qp.setPen(QtCore.Qt.white)
         for hour in range(0,12):
@@ -49,7 +49,7 @@ class Clock(QtGui.QWidget):
                         cy - radius * math.cos(angle),
                         cx + (radius + hourMark) * math.sin(angle),
                         cy - (radius + hourMark) * math.cos(angle))
-        
+
         # copy instance variables to local (because we change the value of hour)
         hour = self.hour
         if (hour > 11):
@@ -76,8 +76,8 @@ class Clock(QtGui.QWidget):
         qp.drawEllipse(cx - 8, cy - 8, 16, 16)
 
         qp.end()
-        
-        
+
+
     def tick(self):
         if (self.demoMode):
             self.second = self.second + 1
@@ -103,12 +103,12 @@ class Clock(QtGui.QWidget):
 
 
 def main():
-    
+
     app = QtGui.QApplication(sys.argv)
     w = Clock()
     w.tick() # update clock before showing
-    #w.show()
-    w.showFullScreen()
+    w.show()
+    w.setGeometry(300, 300, 250, 150)
     sys.exit(app.exec_())
 
 if __name__ == '__main__':
