@@ -16,7 +16,6 @@ class PiPyDesktop(QtGui.QWidget):
         self.setLayout(grid)
         self.setWindowTitle('PiPyDesktop')
         self.setStyleSheet("background-color:black;")
-        self.setGeometry(300, 300, 640, 480)
         self.setCursor(QtCore.Qt.BlankCursor)
         
 def main():
@@ -25,6 +24,7 @@ def main():
     desktop = PiPyDesktop()
     
 #    desktop.show()
+#    desktop.resize(640, 480)
     desktop.showFullScreen()
     sys.exit(app.exec_())
 

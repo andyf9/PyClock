@@ -15,14 +15,14 @@ class Clock(QtGui.QWidget):
         self.hour = 0;
         self.minute = 0;
         self.second = 0;
-        
+
         self.ctimer = QtCore.QTimer()
         self.ctimer.timeout.connect(self.tick)
         if (demoMode):
             self.ctimer.start(10)
         else:
             self.ctimer.start(1000) # 1 second
-        
+
         self.hourPen = QtGui.QPen(QtGui.QBrush(QtCore.Qt.white), 8)
         self.minutePen = QtGui.QPen(QtGui.QBrush(QtCore.Qt.lightGray), 3)
         self.secondPen = QtGui.QPen(QtCore.Qt.red)
@@ -103,12 +103,11 @@ class Clock(QtGui.QWidget):
 
 
 def main():
-
     app = QtGui.QApplication(sys.argv)
     w = Clock()
     w.tick() # update clock before showing
     w.show()
-    w.setGeometry(300, 300, 250, 150)
+    w.resize(640, 480)
     sys.exit(app.exec_())
 
 if __name__ == '__main__':
